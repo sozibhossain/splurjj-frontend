@@ -1,31 +1,17 @@
 import React from "react";
 import FirstBlog from "./FirstBlog";
+import SecondBlog from "./SecondBlog";
 
 const VideosContainer = () => {
   return (
     <div>
       <FirstBlog />
+      <SecondBlog />
     </div>
   );
 };
 
 export default VideosContainer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

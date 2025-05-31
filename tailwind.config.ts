@@ -32,7 +32,7 @@ const config: Config = {
           DEFAULT: "#0253F7",
         },
         secondary: {
-          // DEFAULT: "#01080E",
+          DEFAULT: "#424242",
         },
       },
       // colors: {
