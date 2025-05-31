@@ -3,8 +3,6 @@ import { Manrope } from "next/font/google";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import Navbar from "@/components/shared/Navbar/Navbar";
-import Footer from "@/components/shared/Footer/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AuthProvider from "@/components/provider/AuthProvider";
@@ -38,9 +36,9 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${manrope.variable} antialiased`}>
         <AuthProvider>
           <AppProvider>
-            <Navbar />
+            
             {children}
-            <Footer />
+            
             <Toaster />
             <ToastContainer />
           </AppProvider>
