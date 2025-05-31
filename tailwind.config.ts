@@ -12,21 +12,28 @@ const config: Config = {
       container: {
         center: true,
         padding: {
-          DEFAULT: "14px",
-          lg: "20px",
+          DEFAULT: "20px",
+          md: "40px",
+          lg: "72px",
         },
         screens: {
           sm: "100%",
           md: "100%",
-          lg: "1270px",
+          lg: "1440px",
         },
       },
+      fontFamily: {
+        poppins: ["var(--font-poppins)", "sans-serif"],
+        manrope: ["var(--font-manrope)", "sans-serif"],
+      },
+
       colors: {
         primary: {
-          DEFAULT: "#005FF1",
+          DEFAULT: "#0253F7",
         },
         secondary: {
-          // DEFAULT: "#01080E",
+          DEFAULT: "#424242",
+          50: "#E6EEFE",
         },
       },
       // colors: {
