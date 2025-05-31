@@ -33,6 +33,7 @@ const config: Config = {
         },
         secondary: {
           DEFAULT: "#424242",
+          50: "#E6EEFE",
         },
       },
       // colors: {
