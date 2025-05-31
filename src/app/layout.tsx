@@ -1,28 +1,26 @@
 import type { Metadata } from "next";
-// import localFont from "next/font/local";
+import { Manrope } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/shared/Navbar/Navbar";
-import { Inter } from "next/font/google";
 import Footer from "@/components/shared/Footer/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
+const manrope = Manrope({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'], // customize as needed
+  variable: '--font-manrope', // for Tailwind CSS
+  display: 'swap',
+})
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'], // Choose the weights you need
+  variable: '--font-poppins', // Required for Tailwind integration
+  display: 'swap',
+})
 
-const inter = Inter({
-  subsets: ["latin"], // optional: use ['latin', 'latin-ext'] if needed
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Splurjj",
@@ -36,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${poppins.variable} ${manrope.variable} antialiased`}>
         <Navbar />
         {children}
         <Footer />
