@@ -98,7 +98,7 @@ export function LogingForm() {
                     {...field}
                     placeholder="Enter your email"
                     type="email"
-                    className="w-full md:w-[522px] h-[50px] border border-[#595959] rounded-[8px] text-base font-normal font-poppins leading-[120%] pl-10 text-black bg-black/10 backdrop-blur-sm   placeholder:bg-[#616161] outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0"
+                    className="w-full md:w-[522px] h-[50px] border border-[#595959] rounded-[8px] text-base font-normal font-poppins leading-[120%] pl-10 text-black placeholder:text-[#616161] bg-black/10 backdrop-blur-sm    outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0"
                   />
                   <Mail className="absolute left-3 top-3.5 w-5 h-5 text-black" />
                 </div>
@@ -125,7 +125,7 @@ export function LogingForm() {
                       placeholder="Enter your password"
                       type={showPassword ? "text" : "password"}
                       autoComplete="current-password"
-                      className="w-full md:w-[522px] h-[50px] border border-[#595959] rounded-[8px] text-base font-normal font-poppins leading-[120%] pl-10 text-black bg-black/10 backdrop-blur-sm   placeholder:bg-[#616161] outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0"
+                      className="w-full md:w-[522px] h-[50px] border border-[#595959] rounded-[8px] text-base font-normal font-poppins leading-[120%] pl-10 text-black placeholder:text-[#616161] bg-black/10 backdrop-blur-sm    outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0"
                     />
                     <Lock className="absolute left-3 top-3.5 w-5 h-5 text-black" />
                     <button
