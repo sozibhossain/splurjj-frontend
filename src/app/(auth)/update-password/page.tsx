@@ -15,6 +15,7 @@ const UpdatePassword = () => {
         </p>
       </div>
       <div className="w-full md:w-auto px-[20px]">
+        {/* suspense use  */}
         <Suspense fallback={<div>Loading...</div>}>
           <UpdatePasswordForm />
         </Suspense>
