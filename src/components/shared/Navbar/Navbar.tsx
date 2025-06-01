@@ -9,8 +9,8 @@ const Navbar = () => {
   const pathName = usePathname();
   console.log(pathName);
   return (
-    <div className="sticky top-0 z-50 bg-[#E0E0E0]">
-      <div className=" container py-[15px] md:py-[25px] lg:py-[38px]">
+    <div className="sticky top-0 z-50 bg-white">
+      <div className=" container py-[15px] md:py-[25px] lg:py-[38px] ">
         {/* large device  */}
         <div className="hidden md:block">
           <div className=" w-full flex items-center justify-between">
