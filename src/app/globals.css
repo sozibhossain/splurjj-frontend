@@ -8,10 +8,6 @@
   }
 }
 
-
-
-
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -68,8 +64,6 @@
   }
 }
 
-
-
 /* @layer base {
   * {
     @apply border-border;
@@ -78,3 +72,30 @@
     @apply bg-background text-foreground;
   }
 } */
+
+/* Add this to your global CSS */
+.search-input-enter {
+  width: 0;
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.search-input-enter-active {
+  width: 200px;
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 300ms ease-in-out;
+}
+
+.search-input-exit {
+  width: 200px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.search-input-exit-active {
+  width: 0;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 300ms ease-in-out;
+}
