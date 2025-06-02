@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import Link from "next/link"
+import { toast } from "sonner"
+import { signOut } from "next-auth/react"
+import LogoutModal from "@/components/shared/modals/LogoutModal"
 
 interface Subcategory {
   id: number
@@ -39,10 +42,28 @@ export default function Sidebar() {
   const [editSubcategoryName, setEditSubcategoryName] = useState("")
   const [loading, setLoading] = useState(true)
 
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false)
+
+
   // Fetch categories on component mount
   useEffect(() => {
     fetchCategories()
   }, [])
+
+
+   const handLogout = () => {
+    try {
+      toast.success("Logout successful!");
+      setTimeout(async () => {
+        await signOut({
+          callbackUrl: "/login",
+        });
+      }, 1000);
+    } catch (error) {
+      console.error("Logout failed:", error);
+      toast.error("Logout failed. Please try again.");
+    }
+  };
 
   const token =
     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NwbHVyamouc2NhbGV1cGRldmFnZW5jeS5jb20vYXBpL2xvZ2luIiwiaWF0IjoxNzQ4ODQyNjcyLCJleHAiOjE3NTE0MzQ2NzIsIm5iZiI6MTc0ODg0MjY3MiwianRpIjoiTmZjYmNtd0lRcUtpUk56YSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.JshTEZLKqwVywyOotgVe02650kANeRxVSX431jJzqao"
@@ -322,6 +343,26 @@ export default function Sidebar() {
           Log Out
         </Button>
       </div>
+
+
+      <div className="p-4 border-t border-blue-200">
+        <Button
+          onClick={() => setLogoutModalOpen(true)}
+          variant="ghost"
+          className="w-full justify-start text-red-500 hover:text-red-700 hover:bg-red-50"
+        >
+          Log Out
+        </Button>
+      </div>
+
+      {/* logout modal  */}
+      {logoutModalOpen && (
+        <LogoutModal
+          isOpen={logoutModalOpen}
+          onClose={() => setLogoutModalOpen(false)}
+          onConfirm={handLogout}
+        />
+      )}
     </div>
   )
 }
