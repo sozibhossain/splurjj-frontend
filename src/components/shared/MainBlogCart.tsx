@@ -28,7 +28,9 @@ type BlogType = {
 const MainBlogCart = ({ blog }: { blog: BlogType }) => {
   const pathName = usePathname();
   const newPathName =
-    pathName === "/art-and-culture" ? "ART & CULTURE" : pathName;
+    pathName === "art-and-culture" ? "ART & CULTURE" : pathName;
+
+    console.log("newPathName", newPathName);
 
   return (
     <div>
@@ -41,7 +43,8 @@ const MainBlogCart = ({ blog }: { blog: BlogType }) => {
                   Read
                 </button>
                 <button className="bg-primary py-[6px] px-[12px] rounded-[4px] text-base font-extrabold font-manrope leading-[120%] tracking-[0%] uppercase text-white">
-                  {newPathName}
+                  {/* {newPathName} */}
+                  {pathName}
                 </button>
               </div>
               <div className="flex items-center gap-2">
@@ -56,7 +59,7 @@ const MainBlogCart = ({ blog }: { blog: BlogType }) => {
                 </span>
               </div>
             </div>
-            <Link href={`/art-and-culture/${slugify(blog?.heading || "")}`}>
+            <Link href={`/music/${slugify(blog?.heading || "")}`}>
               <h1 className="text-3xl md:text-[45px] lg:text-[60px] font-manrope font-bold leading-[120%] tracking-[0%] text-[#131313]">
                 {blog?.heading}
               </h1>
