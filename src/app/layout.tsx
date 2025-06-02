@@ -36,10 +36,9 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${manrope.variable} antialiased`}>
         <AuthProvider>
           <AppProvider>
-            
             {children}
-            
-            <Toaster />
+
+            <Toaster position="top-right" />
             <ToastContainer />
           </AppProvider>
         </AuthProvider>
