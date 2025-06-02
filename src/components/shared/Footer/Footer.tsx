@@ -3,7 +3,7 @@ import { IoLogoInstagram } from "react-icons/io5";
 import { FaFacebookF } from "react-icons/fa";
 import NewsLetterForm from "./NewsLetterForm";
 import Image from "next/image";
-import { Linkedin, Twitter } from "lucide-react";
+import { Linkedin, Tally1, Twitter } from "lucide-react";
 
 const Footer = () => {
   const categoryData = [
@@ -243,7 +243,7 @@ const Footer = () => {
           <p className="w-full flex flex-col md:flex-row items-center justify-center pt-3 md:pt-4 text-base font-medium leading-[120%] tracking-[0%] text-white  font-manrope">
             @ 2025 Splurjj Limited .All Rights Reserve. Splurjj is a registered
             tradmark of Splurjj Nation LLC. Terms & Conditions{" "}
-            {/* <Tally1 className="text-white w-[5px] h-auto" /> */}
+            <Tally1 className="text-white w-[5px] h-auto" />
             <span className="px-2" />
             Privecy Policy {/* <Tally1 className="text-white " /> */}
             <span className="px-2" />

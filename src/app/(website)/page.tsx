@@ -1,9 +1,10 @@
 import React from 'react';
+import VideosPage from './videos/page';
 
 const HomePage = () => {
   return (
-    <div className='h-screen'>
-      Home page 
+    <div className=''>
+       <VideosPage/>
     </div> 
   );
 };
