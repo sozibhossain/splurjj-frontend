@@ -31,11 +31,11 @@ const passwordSchema = z
         message: "Password must contain at least one lowercase letter",
       })
       .regex(/[0-9]/, { message: "Password must contain at least one number" }),
-    confirmPassword: z.string(),
+    password_confirmation: z.string(),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.password_confirmation, {
     message: "Passwords do not match",
-    path: ["confirmPassword"],
+    path: ["password_confirmation"],
   });
 
 type PasswordFormValues = z.infer<typeof passwordSchema>;
@@ -53,25 +53,26 @@ export default function UpdatePasswordForm() {
     resolver: zodResolver(passwordSchema),
     defaultValues: {
       password: "",
-      confirmPassword: "",
+      password_confirmation: "",
     },
   });
 
   const { mutate, isPending } = useMutation({
-    mutationKey: ["reset-password"],
-    mutationFn: (values: { newPassword: string; email: string }) =>
-      fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/reset-password`,
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      ).then((res) => res.json()),
+    mutationKey: ["update-password"],
+    mutationFn: (values: {
+      password: string;
+      password_confirmation: string;
+      email: string;
+    }) =>
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/password/reset`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(values),
+      }).then((res) => res.json()),
     onSuccess: (data) => {
-      if (!data?.status) {
+      if (!data?.success) {
         toast.error(data?.message || "Something went wrong");
         return;
       } else {
@@ -88,7 +89,11 @@ export default function UpdatePasswordForm() {
       toast.error("email is required");
       return;
     }
-    mutate({ newPassword: values.password, email: decodedEmail });
+    mutate({
+      password: values.password,
+      password_confirmation: values.password_confirmation,
+      email: decodedEmail,
+    });
   }
 
   return (
@@ -139,7 +144,7 @@ export default function UpdatePasswordForm() {
           <div className="my-6">
             <FormField
               control={form.control}
-              name="confirmPassword"
+              name="password_confirmation"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-[#212121] font-normal text-base tracking-[0%] leading-[120%] font-poppins pb-2">
