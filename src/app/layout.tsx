@@ -39,7 +39,7 @@ export default function RootLayout({
             
             {children}
             
-            <Toaster />
+            <Toaster position="top-right"/>
             <ToastContainer />
           </AppProvider>
         </AuthProvider>

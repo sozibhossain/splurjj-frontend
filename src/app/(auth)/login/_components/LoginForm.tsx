@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { useRouter } from "next/navigation";
-// import { signIn } from "next-auth/react";
-// import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
@@ -20,6 +19,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "react-toastify";
 
 // ✅ Zod Schema
 const loginFormSchema = z.object({
@@ -35,12 +35,8 @@ type LoginFormValues = z.infer<typeof loginFormSchema>;
 export function LogingForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [pending] = useTransition();
 
-  console.log(setIsLoading);
-
-//   const router = useRouter();
-  const loading = isLoading || pending;
+  const router = useRouter();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
@@ -54,27 +50,27 @@ export function LogingForm() {
   // ✅ Handle submit
   async function onSubmit(data: LoginFormValues) {
     console.log(data);
-    // try {
-    //   setIsLoading(true);
+    try {
+      setIsLoading(true);
 
-    //   const res = await signIn("credentials", {
-    //     email: data.email,
-    //     password: data.password,
-    //     redirect: false,
-    //   });
+      const res = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
 
-    //   if (res?.error) {
-    //     throw new Error(res.error);
-    //   }
+      if (res?.error) {
+        throw new Error(res.error);
+      }
 
-    //   toast.success("Login successful!");
-    //   router.push("/admin-dashboard");
-    // } catch (error) {
-    //   console.error("Login failed:", error);
-    //   toast.error((error as Error).message);
-    // } finally {
-    //   setIsLoading(false);
-    // }
+      toast.success("Login successful!");
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Login failed:", error);
+      toast.error((error as Error).message);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -182,9 +178,9 @@ export function LogingForm() {
         <button
           type="submit"
           className="w-full h-[51px] bg-[#34A1E8] rounded-[8px] text-base font-bold tracking-[0%] font-poppins text-white "
-          disabled={loading}
+          disabled={isLoading}
         >
-          {loading ? "Signing In..." : "Sign In"}
+          {isLoading ? "Signing In..." : "Sign In"}
         </button>
       </form>
     </Form>
