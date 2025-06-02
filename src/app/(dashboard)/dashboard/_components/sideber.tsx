@@ -1,14 +1,22 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { ChevronDown, ChevronRight, Plus, Edit2, Trash2, Check, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import Link from "next/link"
-import { toast } from "sonner"
-import { signOut } from "next-auth/react"
-import LogoutModal from "@/components/shared/modals/LogoutModal"
+import { useState, useEffect } from "react";
+import {
+  ChevronDown,
+  ChevronRight,
+  Plus,
+  Edit2,
+  Trash2,
+  Check,
+  X,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import Link from "next/link";
+import { signOut } from "next-auth/react";
+import LogoutModal from "@/components/shared/modals/LogoutModal";
+import { toast } from "sonner";
 
 interface Subcategory {
   id: number

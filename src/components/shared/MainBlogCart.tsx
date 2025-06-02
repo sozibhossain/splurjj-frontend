@@ -27,8 +27,10 @@ type BlogType = {
 
 const MainBlogCart = ({ blog }: { blog: BlogType }) => {
   const pathName = usePathname();
-  const newPathName =
-    pathName === "art-and-culture" ? "ART & CULTURE" : pathName;
+  console.log("pathName", pathName)
+const newPathName =
+  pathName === "/art-and-culture" ? "ART & CULTURE" : `${pathName}`;
+
 
     console.log("newPathName", newPathName);
 
@@ -43,8 +45,7 @@ const MainBlogCart = ({ blog }: { blog: BlogType }) => {
                   Read
                 </button>
                 <button className="bg-primary py-[6px] px-[12px] rounded-[4px] text-base font-extrabold font-manrope leading-[120%] tracking-[0%] uppercase text-white">
-                  {/* {newPathName} */}
-                  {pathName}
+                  {newPathName}
                 </button>
               </div>
               <div className="flex items-center gap-2">
