@@ -1,69 +1,57 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import {
-  ChevronDown,
-  ChevronRight,
-  Plus,
-  Edit2,
-  Trash2,
-  Check,
-  X,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import Link from "next/link";
-import { toast } from "react-toastify";
-import { signOut } from "next-auth/react";
-import LogoutModal from "@/components/shared/modals/LogoutModal";
+import { useState, useEffect } from "react"
+import { ChevronDown, ChevronRight, Plus, Edit2, Trash2, Check, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import Link from "next/link"
+import { toast } from "sonner"
+import { signOut } from "next-auth/react"
+import LogoutModal from "@/components/shared/modals/LogoutModal"
 
 interface Subcategory {
-  id: number;
-  name: string;
-  category_id?: number;
+  id: number
+  name: string
+  category_id?: number
 }
 
 interface Category {
-  category_id: number;
-  category_name: string;
-  subcategories: Subcategory[];
+  category_id: number
+  category_name: string
+  subcategories: Subcategory[]
 }
 
 interface ApiResponse {
-  success: boolean;
-  data: Category[];
+  success: boolean
+  data: Category[]
   pagination: {
-    current_page: number;
-    last_page: number;
-    per_page: number;
-    total: number;
-  };
+    current_page: number
+    last_page: number
+    per_page: number
+    total: number
+  }
 }
 
 export default function Sidebar() {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [expandedCategories, setExpandedCategories] = useState<Set<number>>(
-    new Set()
-  );
-  const [addingSubcategory, setAddingSubcategory] = useState<number | null>(
-    null
-  );
-  const [editingSubcategory, setEditingSubcategory] = useState<number | null>(
-    null
-  );
-  const [newSubcategoryName, setNewSubcategoryName] = useState("");
-  const [editSubcategoryName, setEditSubcategoryName] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState<Category[]>([])
+  const [expandedCategories, setExpandedCategories] = useState<Set<number>>(new Set())
+  const [addingSubcategory, setAddingSubcategory] = useState<number | null>(null)
+  const [editingSubcategory, setEditingSubcategory] = useState<number | null>(null)
+  const [newSubcategoryName, setNewSubcategoryName] = useState("")
+  const [editSubcategoryName, setEditSubcategoryName] = useState("")
+  const [loading, setLoading] = useState(true)
 
-  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false)
+
 
   // Fetch categories on component mount
   useEffect(() => {
-    fetchCategories();
-  }, []);
+    fetchCategories()
+  }, [])
 
-  const handLogout = () => {
+
+   const handLogout = () => {
     try {
       toast.success("Logout successful!");
       setTimeout(async () => {
@@ -78,139 +66,125 @@ export default function Sidebar() {
   };
 
   const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NwbHVyamouc2NhbGV1cGRldmFnZW5jeS5jb20vYXBpL2xvZ2luIiwiaWF0IjoxNzQ4ODQyNjcyLCJleHAiOjE3NTE0MzQ2NzIsIm5iZiI6MTc0ODg0MjY3MiwianRpIjoiTmZjYmNtd0lRcUtpUk56YSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.JshTEZLKqwVywyOotgVe02650kANeRxVSX431jJzqao";
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NwbHVyamouc2NhbGV1cGRldmFnZW5jeS5jb20vYXBpL2xvZ2luIiwiaWF0IjoxNzQ4ODQyNjcyLCJleHAiOjE3NTE0MzQ2NzIsIm5iZiI6MTc0ODg0MjY3MiwianRpIjoiTmZjYmNtd0lRcUtpUk56YSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.JshTEZLKqwVywyOotgVe02650kANeRxVSX431jJzqao"
 
   const fetchCategories = async () => {
     try {
-      setLoading(true);
-      const response = await fetch(
-        "https://splurjj.scaleupdevagency.com/api/categories"
-      );
-      const data: ApiResponse = await response.json();
+      setLoading(true)
+      const response = await fetch("https://splurjj.scaleupdevagency.com/api/categories")
+      const data: ApiResponse = await response.json()
       if (data.success) {
-        setCategories(data.data);
+        setCategories(data.data)
       }
     } catch (error) {
-      console.error("Error fetching categories:", error);
+      console.error("Error fetching categories:", error)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const toggleCategory = (categoryId: number) => {
-    const newExpanded = new Set(expandedCategories);
+    const newExpanded = new Set(expandedCategories)
     if (newExpanded.has(categoryId)) {
-      newExpanded.delete(categoryId);
+      newExpanded.delete(categoryId)
     } else {
-      newExpanded.add(categoryId);
+      newExpanded.add(categoryId)
     }
-    setExpandedCategories(newExpanded);
-  };
+    setExpandedCategories(newExpanded)
+  }
 
   const handleAddSubcategory = async (categoryId: number) => {
-    if (!newSubcategoryName.trim()) return;
+    if (!newSubcategoryName.trim()) return
 
     try {
-      const response = await fetch(
-        "https://splurjj.scaleupdevagency.com/api/subcategories",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            category_id: categoryId,
-            name: newSubcategoryName.trim(),
-          }),
-        }
-      );
+      const response = await fetch("https://splurjj.scaleupdevagency.com/api/subcategories", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          category_id: categoryId,
+          name: newSubcategoryName.trim(),
+        }),
+      })
 
       if (response.ok) {
-        await fetchCategories(); // Refresh the data
-        setNewSubcategoryName("");
-        setAddingSubcategory(null);
+        await fetchCategories() // Refresh the data
+        setNewSubcategoryName("")
+        setAddingSubcategory(null)
       }
     } catch (error) {
-      console.error("Error adding subcategory:", error);
+      console.error("Error adding subcategory:", error)
     }
-  };
+  }
 
-  const handleEditSubcategory = async (
-    subcategoryId: number,
-    categoryId: number
-  ) => {
-    if (!editSubcategoryName.trim()) return;
+  const handleEditSubcategory = async (subcategoryId: number, categoryId: number) => {
+    if (!editSubcategoryName.trim()) return
 
     try {
-      const response = await fetch(
-        `https://splurjj.scaleupdevagency.com/api/subcategories/${subcategoryId}`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "mapplication/json",
-          },
-          body: JSON.stringify({
-            name: editSubcategoryName,
-            category_id: categoryId, // include if required by the backend
-          }),
-        }
-      );
+      const response = await fetch(`https://splurjj.scaleupdevagency.com/api/subcategories/${subcategoryId}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "mapplication/json",
+        },
+        body: JSON.stringify({
+          name: editSubcategoryName,
+          category_id: categoryId, // include if required by the backend
+        }),
+      })
 
       if (response.ok) {
-        await fetchCategories(); // Refresh the data
-        setEditSubcategoryName("");
-        setEditingSubcategory(null);
+        await fetchCategories() // Refresh the data
+        setEditSubcategoryName("")
+        setEditingSubcategory(null)
       }
     } catch (error) {
-      console.error("Error editing subcategory:", error);
+      console.error("Error editing subcategory:", error)
     }
-  };
+  }
 
   const handleDeleteSubcategory = async (subcategoryId: number) => {
-    if (!confirm("Are you sure you want to delete this subcategory?")) return;
+    if (!confirm("Are you sure you want to delete this subcategory?")) return
 
     try {
-      const response = await fetch(
-        `https://splurjj.scaleupdevagency.com/api/subcategories/${subcategoryId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`https://splurjj.scaleupdevagency.com/api/subcategories/${subcategoryId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
 
       if (response.ok) {
-        await fetchCategories(); // Refresh the data
+        await fetchCategories() // Refresh the data
       }
     } catch (error) {
-      console.error("Error deleting subcategory:", error);
+      console.error("Error deleting subcategory:", error)
     }
-  };
+  }
 
   const startEditing = (subcategory: Subcategory) => {
-    setEditingSubcategory(subcategory.id);
-    setEditSubcategoryName(subcategory.name);
-  };
+    setEditingSubcategory(subcategory.id)
+    setEditSubcategoryName(subcategory.name)
+  }
 
   const cancelEditing = () => {
-    setEditingSubcategory(null);
-    setEditSubcategoryName("");
-  };
+    setEditingSubcategory(null)
+    setEditSubcategoryName("")
+  }
 
   const cancelAdding = () => {
-    setAddingSubcategory(null);
-    setNewSubcategoryName("");
-  };
+    setAddingSubcategory(null)
+    setNewSubcategoryName("")
+  }
 
   if (loading) {
     return (
       <div className="w-64 h-screen bg-gradient-to-b from-blue-100 to-blue-300 p-4">
         <div className="text-center">Loading...</div>
       </div>
-    );
+    )
   }
 
   return (
@@ -218,7 +192,7 @@ export default function Sidebar() {
       <ScrollArea className="flex-1 p-4">
         <div className="space-y-2">
           <div>
-            <Link href="/dashboard/category">
+            <Link href="/dashboard">
               <Button
                 variant="ghost"
                 className="w-full justify-start text-left text-xs text-gray-500 hover:bg-blue-200/30"
@@ -241,9 +215,7 @@ export default function Sidebar() {
                   ) : (
                     <ChevronRight className="h-4 w-4 flex-shrink-0" />
                   )}
-                  <span className="text-sm font-medium text-gray-700 truncate">
-                    {category.category_name}
-                  </span>
+                  <span className="text-sm font-medium text-gray-700 truncate">{category.category_name}</span>
                 </div>
               </Button>
 
@@ -256,18 +228,13 @@ export default function Sidebar() {
                         <div className="flex items-center gap-1 p-1">
                           <Input
                             value={editSubcategoryName}
-                            onChange={(e) =>
-                              setEditSubcategoryName(e.target.value)
-                            }
+                            onChange={(e) => setEditSubcategoryName(e.target.value)}
                             className="h-7 text-xs"
                             onKeyDown={(e) => {
                               if (e.key === "Enter") {
-                                handleEditSubcategory(
-                                  subcategory.id,
-                                  category.category_id
-                                );
+                                handleEditSubcategory(subcategory.id, category.category_id)
                               } else if (e.key === "Escape") {
-                                cancelEditing();
+                                cancelEditing()
                               }
                             }}
                             autoFocus
@@ -276,29 +243,22 @@ export default function Sidebar() {
                             size="sm"
                             variant="ghost"
                             className="h-7 w-7 p-0"
-                            onClick={() =>
-                              handleEditSubcategory(
-                                subcategory.id,
-                                category.category_id
-                              )
-                            }
+                            onClick={() => handleEditSubcategory(subcategory.id, category.category_id)}
                           >
                             <Check className="h-3 w-3" />
                           </Button>
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            className="h-7 w-7 p-0"
-                            onClick={cancelEditing}
-                          >
+                          <Button size="sm" variant="ghost" className="h-7 w-7 p-0" onClick={cancelEditing}>
                             <X className="h-3 w-3" />
                           </Button>
                         </div>
                       ) : (
                         <div className="flex items-center justify-between p-1 rounded hover:bg-blue-200/30">
-                          <span className="text-xs text-gray-600 truncate flex-1">
+                          <Link
+                            href={`/dashboard/content/${category.category_id}/${subcategory.id}`}
+                            className="text-xs text-gray-600 truncate flex-1 hover:text-blue-600"
+                          >
                             {subcategory.name}
-                          </span>
+                          </Link>
                           <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                             <Button
                               size="sm"
@@ -312,9 +272,7 @@ export default function Sidebar() {
                               size="sm"
                               variant="ghost"
                               className="h-6 w-6 p-0 text-red-500 hover:text-red-700"
-                              onClick={() =>
-                                handleDeleteSubcategory(subcategory.id)
-                              }
+                              onClick={() => handleDeleteSubcategory(subcategory.id)}
                             >
                               <Trash2 className="h-3 w-3" />
                             </Button>
@@ -334,9 +292,9 @@ export default function Sidebar() {
                         className="h-7 text-xs"
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
-                            handleAddSubcategory(category.category_id);
+                            handleAddSubcategory(category.category_id)
                           } else if (e.key === "Escape") {
-                            cancelAdding();
+                            cancelAdding()
                           }
                         }}
                         autoFocus
@@ -345,18 +303,11 @@ export default function Sidebar() {
                         size="sm"
                         variant="ghost"
                         className="h-7 w-7 p-0"
-                        onClick={() =>
-                          handleAddSubcategory(category.category_id)
-                        }
+                        onClick={() => handleAddSubcategory(category.category_id)}
                       >
                         <Check className="h-3 w-3" />
                       </Button>
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        className="h-7 w-7 p-0"
-                        onClick={cancelAdding}
-                      >
+                      <Button size="sm" variant="ghost" className="h-7 w-7 p-0" onClick={cancelAdding}>
                         <X className="h-3 w-3" />
                       </Button>
                     </div>
@@ -381,15 +332,13 @@ export default function Sidebar() {
       {/* Footer */}
       <div className="p-4 border-t border-blue-200">
         <Link href="/dashboard/settings">
-          <Button
-            variant="ghost"
-            className="w-full justify-start text-black hover:bg-red-50"
-          >
+          <Button variant="ghost" className="w-full justify-start text-black hover:bg-red-50">
             Setting
           </Button>
         </Link>
       </div>
-      {/* Footer */}
+
+
       <div className="p-4 border-t border-blue-200">
         <Button
           onClick={() => setLogoutModalOpen(true)}
@@ -409,5 +358,5 @@ export default function Sidebar() {
         />
       )}
     </div>
-  );
+  )
 }
