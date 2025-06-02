@@ -337,12 +337,6 @@ export default function Sidebar() {
           </Button>
         </Link>
       </div>
-      {/* Footer */}
-      <div className="p-4 border-t border-blue-200">
-        <Button variant="ghost" className="w-full justify-start text-red-500 hover:text-red-700 hover:bg-red-50">
-          Log Out
-        </Button>
-      </div>
 
 
       <div className="p-4 border-t border-blue-200">
