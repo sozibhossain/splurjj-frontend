@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +13,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Mail } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 // ✅ Zod Schema
 const loginFormSchema = z.object({
@@ -23,13 +25,7 @@ const loginFormSchema = z.object({
 type LoginFormValues = z.infer<typeof loginFormSchema>;
 
 export function ForgotPasswordForm() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [pending] = useTransition();
-
-  console.log(setIsLoading);
-
-  //   const router = useRouter();
-  const loading = isLoading || pending;
+  const router = useRouter();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
@@ -38,9 +34,30 @@ export function ForgotPasswordForm() {
     },
   });
 
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["forgot-password"],
+    mutationFn: (email: string) =>
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/password/email`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      }).then((res) => res.json()),
+    onSuccess: (data, email) => {
+      if (!data?.success) {
+        toast.error(data?.message || "Something went wrong");
+        return;
+      }
+      toast.success(data?.message || "Email sent Successfully");
+      router.push(`/verify-otp?email=${encodeURIComponent(email)}`);
+    },
+  });
+
   // ✅ Handle submit
   async function onSubmit(data: LoginFormValues) {
     console.log(data);
+    mutate(data.email);
   }
 
   return (
@@ -79,9 +96,9 @@ export function ForgotPasswordForm() {
           <button
             type="submit"
             className="w-full h-[51px] bg-[#34A1E8] rounded-[8px] text-base font-bold tracking-[0%] font-poppins text-white "
-            disabled={loading}
+            disabled={isPending}
           >
-            {loading ? "Sending..." : "Send OTP"}
+            {isPending ? "Sending..." : "Send OTP"}
           </button>
         </div>
       </form>

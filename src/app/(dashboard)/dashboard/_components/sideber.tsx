@@ -14,9 +14,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
-import { toast } from "react-toastify";
 import { signOut } from "next-auth/react";
 import LogoutModal from "@/components/shared/modals/LogoutModal";
+import { toast } from "sonner";
 
 interface Subcategory {
   id: number;
