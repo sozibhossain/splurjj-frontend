@@ -17,8 +17,9 @@ const Navbar = () => {
     { name: "LATEST", href: "/", hasDropdown: false },
     { name: "ART & CULTURE", href: "/art-and-culture", hasDropdown: true },
     { name: "GEAR", href: "#", hasDropdown: true },
-    { name: "MUSIC", href: "#", hasDropdown: true },
+    { name: "MUSIC", href: "/music", hasDropdown: true },
     { name: "QUIET CALM", href: "#", hasDropdown: true },
+    { name: "RIDE", href: "/ride", hasDropdown: true },
     { name: "VIDEOS", href: "/videos", hasDropdown: true },
     { name: "SHOP", href: "#", hasDropdown: true },
   ];
