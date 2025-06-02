@@ -44,8 +44,8 @@ export default function Sidebar() {
     fetchCategories()
   }, [])
 
-
-  const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NwbHVyamouc2NhbGV1cGRldmFnZW5jeS5jb20vYXBpL2xvZ2luIiwiaWF0IjoxNzQ4ODQyNjcyLCJleHAiOjE3NTE0MzQ2NzIsIm5iZiI6MTc0ODg0MjY3MiwianRpIjoiTmZjYmNtd0lRcUtpUk56YSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.JshTEZLKqwVywyOotgVe02650kANeRxVSX431jJzqao"
+  const token =
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NwbHVyamouc2NhbGV1cGRldmFnZW5jeS5jb20vYXBpL2xvZ2luIiwiaWF0IjoxNzQ4ODQyNjcyLCJleHAiOjE3NTE0MzQ2NzIsIm5iZiI6MTc0ODg0MjY3MiwianRpIjoiTmZjYmNtd0lRcUtpUk56YSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.JshTEZLKqwVywyOotgVe02650kANeRxVSX431jJzqao"
 
   const fetchCategories = async () => {
     try {
@@ -171,7 +171,14 @@ export default function Sidebar() {
       <ScrollArea className="flex-1 p-4">
         <div className="space-y-2">
           <div>
-            <Link href="/dashboard/category"><Button variant="ghost" className="w-full justify-start text-left text-xs text-gray-500 hover:bg-blue-200/30">Add Category</Button></Link>
+            <Link href="/dashboard">
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-left text-xs text-gray-500 hover:bg-blue-200/30"
+              >
+                Add Category
+              </Button>
+            </Link>
           </div>
           {categories.map((category) => (
             <div key={category.category_id} className="space-y-1">
@@ -225,7 +232,12 @@ export default function Sidebar() {
                         </div>
                       ) : (
                         <div className="flex items-center justify-between p-1 rounded hover:bg-blue-200/30">
-                          <span className="text-xs text-gray-600 truncate flex-1">{subcategory.name}</span>
+                          <Link
+                            href={`/dashboard/content/${category.category_id}/${subcategory.id}`}
+                            className="text-xs text-gray-600 truncate flex-1 hover:text-blue-600"
+                          >
+                            {subcategory.name}
+                          </Link>
                           <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                             <Button
                               size="sm"
@@ -293,16 +305,16 @@ export default function Sidebar() {
               )}
             </div>
           ))}
-
-
         </div>
       </ScrollArea>
 
       {/* Footer */}
       <div className="p-4 border-t border-blue-200">
-        <Link href="/dashboard/settings"><Button variant="ghost" className="w-full justify-start text-black hover:bg-red-50">
-          Setting
-        </Button></Link>
+        <Link href="/dashboard/settings">
+          <Button variant="ghost" className="w-full justify-start text-black hover:bg-red-50">
+            Setting
+          </Button>
+        </Link>
       </div>
       {/* Footer */}
       <div className="p-4 border-t border-blue-200">
