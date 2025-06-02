@@ -15,7 +15,7 @@ const Navbar = () => {
   // Menu items data
   const menuItems = [
     { name: "LATEST", href: "/", hasDropdown: false },
-    { name: "ART & CULTURE", href: "#", hasDropdown: true },
+    { name: "ART & CULTURE", href: "/art-and-culture", hasDropdown: true },
     { name: "GEAR", href: "#", hasDropdown: true },
     { name: "MUSIC", href: "#", hasDropdown: true },
     { name: "QUIET CALM", href: "#", hasDropdown: true },

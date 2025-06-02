@@ -3,7 +3,7 @@ import VideosPage from './videos/page';
 
 const HomePage = () => {
   return (
-    <div className='h-screen'>
+    <div className=''>
        <VideosPage/>
     </div> 
   );
