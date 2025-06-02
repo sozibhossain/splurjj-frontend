@@ -170,6 +170,9 @@ export default function Sidebar() {
     <div className="w-64 h-screen">
       <ScrollArea className="flex-1 p-4">
         <div className="space-y-2">
+          <div>
+            <Link href="/dashboard/category"><Button variant="ghost" className="w-full justify-start text-left text-xs text-gray-500 hover:bg-blue-200/30">Add Category</Button></Link>
+          </div>
           {categories.map((category) => (
             <div key={category.category_id} className="space-y-1">
               {/* Category Header */}
@@ -291,12 +294,16 @@ export default function Sidebar() {
             </div>
           ))}
 
-          <div>
-            <Link href="/dashboard/add-category"><Button variant="ghost" className="w-full justify-start text-left text-xs text-gray-500 hover:bg-blue-200/30">Add Category</Button></Link>
-          </div>
+
         </div>
       </ScrollArea>
 
+      {/* Footer */}
+      <div className="p-4 border-t border-blue-200">
+        <Link href="/dashboard/settings"><Button variant="ghost" className="w-full justify-start text-black hover:bg-red-50">
+          Setting
+        </Button></Link>
+      </div>
       {/* Footer */}
       <div className="p-4 border-t border-blue-200">
         <Button variant="ghost" className="w-full justify-start text-red-500 hover:text-red-700 hover:bg-red-50">
