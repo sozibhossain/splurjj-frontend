@@ -2,7 +2,7 @@
 
 import { Input } from "@/components/ui/input"
 import { ChevronDown, Menu, Search, ShoppingCart, X } from "lucide-react"
-import { useSession } from "next-auth/react"
+// import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
