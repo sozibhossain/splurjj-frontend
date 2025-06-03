@@ -35,6 +35,8 @@ export default function SubcategoryContentPage() {
   const categoryId = params?.catId
   const subcategoryId = params?.subCatId
 
+  
+
   const [contents, setContents] = useState<Content[]>([])
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
