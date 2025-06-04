@@ -126,11 +126,10 @@ const Navbar = () => {
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        className={`text-base md:text-lg lg:text-xl leading-[120%] uppercase font-manrope tracking-[0%] font-medium ${
-                          pathName === item.href
+                        className={`text-base md:text-lg lg:text-xl leading-[120%] uppercase font-manrope tracking-[0%] font-medium ${pathName === item.href
                             ? "text-[#0253F7] font-extrabold"
                             : "text-[#424242] hover:text-black"
-                        } transition-colors`}
+                          } transition-colors`}
                       >
                         {item.name}
                       </Link>
@@ -148,11 +147,10 @@ const Navbar = () => {
                         {category.subcategories.length > 0 && (
                           <ChevronDown
                             size={16}
-                            className={`transition-transform ${
-                              openDropdown === category.category_id
+                            className={`transition-transform ${openDropdown === category.category_id
                                 ? "rotate-180"
                                 : ""
-                            }`}
+                              }`}
                           />
                         )}
                       </button>
@@ -165,7 +163,7 @@ const Navbar = () => {
                               {category.subcategories.map((subcategory) => (
                                 <Link
                                   key={subcategory.id}
-                                  href={`/all-content/${category.category_id}/${subcategory.id}`}
+                                  href={`/content/${category.category_id}/${subcategory.id}`}
                                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors"
                                   onClick={() => setOpenDropdown(null)}
                                 >
@@ -198,18 +196,16 @@ const Navbar = () => {
                   </button>
 
                   <div
-                    className={`absolute right-0 top-0 transition-all duration-300 ease-in-out ${
-                      isSearchOpen
+                    className={`absolute right-0 top-0 transition-all duration-300 ease-in-out ${isSearchOpen
                         ? "translate-x-[-40px] w-[240px]"
                         : "w-0 opacity-0"
-                    }`}
+                      }`}
                   >
                     <Input
                       ref={inputRef}
                       placeholder="Search..."
-                      className={`border border-gray-300 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0 pl-2 w-full ${
-                        isSearchOpen ? "block" : "hidden"
-                      }`}
+                      className={`border border-gray-300 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0 pl-2 w-full ${isSearchOpen ? "block" : "hidden"
+                        }`}
                     />
                   </div>
                 </div>
@@ -270,11 +266,10 @@ const Navbar = () => {
                   <div key={item.name}>
                     <Link
                       href={item.href}
-                      className={`block py-2 px-1 text-lg ${
-                        pathName === item.href
+                      className={`block py-2 px-1 text-lg ${pathName === item.href
                           ? "font-bold text-black"
                           : "font-medium text-gray-600 hover:text-black"
-                      } transition-colors`}
+                        } transition-colors`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {item.name}
@@ -293,11 +288,10 @@ const Navbar = () => {
                       {category.subcategories.length > 0 && (
                         <ChevronDown
                           size={16}
-                          className={`transition-transform ${
-                            openDropdown === category.category_id
+                          className={`transition-transform ${openDropdown === category.category_id
                               ? "rotate-180"
                               : ""
-                          }`}
+                            }`}
                         />
                       )}
                     </button>
