@@ -80,7 +80,7 @@ export default function Sidebar() {
   const fetchCategories = async () => {
     try {
       setLoading(true)
-      const response = await fetch("https://splurjj.scaleupdevagency.com/api/categories")
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories`)
       const data: ApiResponse = await response.json()
       if (data.success) {
         setCategories(data.data)
@@ -91,6 +91,8 @@ export default function Sidebar() {
       setLoading(false)
     }
   }
+
+  console.log("categories", categories)
 
   const toggleCategory = (categoryId: number) => {
     const newExpanded = new Set(expandedCategories)

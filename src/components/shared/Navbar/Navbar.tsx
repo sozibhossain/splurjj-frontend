@@ -2,7 +2,7 @@
 
 import { Input } from "@/components/ui/input"
 import { ChevronDown, Menu, Search, ShoppingCart, X } from "lucide-react"
-// import { useSession } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
@@ -40,8 +40,8 @@ const Navbar = () => {
   const pathName = usePathname()
 
 
-  // const sesseion = useSession()
-  // const token = sesseion?.data?.user?.token || ""
+  const sesseion = useSession()
+  const token = (sesseion?.data?.user as {token:string})?.token
 
 
 
@@ -52,7 +52,7 @@ const Navbar = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch("https://splurjj.scaleupdevagency.com/api/categories")
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories`)
       const data: ApiResponse = await response.json()
       if (data.success) {
         setCategories(data.data)
@@ -100,7 +100,7 @@ const Navbar = () => {
   }, [isSearchOpen])
 
   // Static menu items (you can keep these or remove them)
-  const staticMenuItems = [
+  const staticMenuItems = [ 
     { name: "Home", href: "/", hasDropdown: false },
     { name: "About", href: "/about", hasDropdown: false },
   ]
