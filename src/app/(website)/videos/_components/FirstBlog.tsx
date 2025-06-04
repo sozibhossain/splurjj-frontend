@@ -21,13 +21,13 @@ const FirstBlog = () => {
               </div>
               <div className="flex items-center gap-2">
                 <span>
-                  <RiShareForwardLine className="w-6 h-6 text-black" />
+                  <RiShareForwardLine className="w-6 h-6 icon" />
                 </span>
                 <span>
-                  <TbTargetArrow className="w-6 h-6 text-black" />
+                  <TbTargetArrow className="w-6 h-6 icon" />
                 </span>
                 <span>
-                  <FaRegCommentDots className="w-6 h-6 text-black" />
+                  <FaRegCommentDots className="w-6 h-6 icon" />
                 </span>
               </div>
             </div>

@@ -83,14 +83,14 @@ export default function ContentFormModal({
 
       // Set image previews if available
       if (typeof initialContent.image1 === "string" && initialContent.image1.startsWith("images/")) {
-        setImage1Preview(`https://splurjj.scaleupdevagency.com/storage/${initialContent.image1}`)
+        setImage1Preview(`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${initialContent.image1}`)
       }
 
       if (
         typeof initialContent.advertising_image === "string" &&
         initialContent.advertising_image.startsWith("images/")
       ) {
-        setAdImagePreview(`https://splurjj.scaleupdevagency.com/storage/${initialContent.advertising_image}`)
+        setAdImagePreview(`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${initialContent.advertising_image}`)
       }
     } else {
       resetForm()
