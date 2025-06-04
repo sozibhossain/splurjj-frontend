@@ -9,19 +9,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      container: {
-        center: true,
-        padding: {
-          DEFAULT: "20px",
-          md: "40px",
-          lg: "72px",
-        },
-        screens: {
-          sm: "100%",
-          md: "100%",
-          lg: "1440px",
-        },
-      },
+      // container: {
+      //   center: true,
+      //   padding: {
+      //     DEFAULT: "20px",
+      //     md: "40px",
+      //     lg: "72px",
+      //   },
+      //   screens: {
+      //     sm: "100%",
+      //     md: "100%",
+      //     lg: "1440px",
+      //   },
+      // },
       fontFamily: {
         poppins: ["var(--font-poppins)", "sans-serif"],
         manrope: ["var(--font-manrope)", "sans-serif"],
