@@ -58,7 +58,7 @@ export default function SubcategoryContentPage() {
     try {
       setLoading(true)
 
-      const response = await fetch(`https://splurjj.scaleupdevagency.com/api/contents/${categoryId}/${subcategoryId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/contents/${categoryId}/${subcategoryId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -91,7 +91,7 @@ export default function SubcategoryContentPage() {
     if (!confirm("Are you sure you want to delete this content?")) return
 
     try {
-      const response = await fetch(`https://splurjj.scaleupdevagency.com/api/contents/${contentId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/contents/${contentId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -120,8 +120,8 @@ export default function SubcategoryContentPage() {
     try {
       const isEditing = !!editingContent
       const url = isEditing
-        ? `https://splurjj.scaleupdevagency.com/api/contents/${editingContent?.id}`
-        : "https://splurjj.scaleupdevagency.com/api/contents"
+        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/contents/${editingContent?.id}`
+        : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/contents`
 
       const method = isEditing ? "POST" : "POST" // Many APIs use POST for both create and update with FormData
 

@@ -6,6 +6,7 @@ import Link from "next/link"
 import AddCategoryDialog from "../_components/add-category-dialog"
 import CategoryTable from "../_components/category-table"
 import EditCategoryDialog from "../_components/edit-category-dialog"
+import { useSession } from "next-auth/react"
 
 interface Category {
   category_id: number
@@ -33,8 +34,8 @@ export default function CategoryPage() {
   const [editingCategory, setEditingCategory] = useState<Category | null>(null)
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
 
-  const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NwbHVyamouc2NhbGV1cGRldmFnZW5jeS5jb20vYXBpL2xvZ2luIiwiaWF0IjoxNzQ4ODQyNjcyLCJleHAiOjE3NTE0MzQ2NzIsIm5iZiI6MTc0ODg0MjY3MiwianRpIjoiTmZjYmNtd0lRcUtpUk56YSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.JshTEZLKqwVywyOotgVe02650kANeRxVSX431jJzqao"
+const session = useSession();
+const token = (session?.data?.user as {token : string})?.token;
 
   useEffect(() => {
     fetchCategories()
@@ -43,7 +44,7 @@ export default function CategoryPage() {
   const fetchCategories = async () => {
     try {
       setLoading(true)
-      const response = await fetch("https://splurjj.scaleupdevagency.com/api/categories")
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories`)
       const data: ApiResponse = await response.json()
       if (data.success) {
         setCategories(data.data)
@@ -56,7 +57,7 @@ export default function CategoryPage() {
   }
 
   const handleAddCategory = async (categoryName: string) => {
-    const response = await fetch("https://splurjj.scaleupdevagency.com/api/categories", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -73,7 +74,7 @@ export default function CategoryPage() {
   }
 
   const handleEditCategory = async (categoryId: number, categoryName: string) => {
-    const response = await fetch(`https://splurjj.scaleupdevagency.com/api/categories/${categoryId}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories/${categoryId}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -93,7 +94,7 @@ export default function CategoryPage() {
     if (!confirm("Are you sure you want to delete this category? This will also delete all subcategories.")) return
 
     try {
-      const response = await fetch(`https://splurjj.scaleupdevagency.com/api/categories/${categoryId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories/${categoryId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

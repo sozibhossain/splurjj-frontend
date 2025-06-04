@@ -216,3 +216,8 @@ Link{
 span{
   @apply text-[#131313] dark:text-white
 }
+
+
+.icon{
+  @apply text-[#131313] dark:text-white
+}

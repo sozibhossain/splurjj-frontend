@@ -108,7 +108,7 @@ export default function Sidebar() {
     if (!newSubcategoryName.trim()) return
 
     try {
-      const response = await fetch("https://splurjj.scaleupdevagency.com/api/subcategories", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/subcategories`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -134,7 +134,7 @@ export default function Sidebar() {
     if (!editSubcategoryName.trim()) return
 
     try {
-      const response = await fetch(`https://splurjj.scaleupdevagency.com/api/subcategories/${subcategoryId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/subcategories/${subcategoryId}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -160,7 +160,7 @@ export default function Sidebar() {
     if (!confirm("Are you sure you want to delete this subcategory?")) return
 
     try {
-      const response = await fetch(`https://splurjj.scaleupdevagency.com/api/subcategories/${subcategoryId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/subcategories/${subcategoryId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

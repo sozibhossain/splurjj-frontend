@@ -47,7 +47,7 @@ export default function ChangePasswordFormComponent() {
     mutationKey: ["change-password"],
     mutationFn: (values: z.infer<typeof formSchema>) =>
       fetch(
-        `https://dynamic-splurjj.scaleupdevagency.com/api/settings/password`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/settings/password`,
         {
           method: "PUT",
           headers: {
