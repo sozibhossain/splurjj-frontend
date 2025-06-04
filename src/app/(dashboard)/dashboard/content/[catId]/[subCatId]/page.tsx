@@ -8,6 +8,7 @@ import Link from "next/link"
 import { useParams } from "next/navigation"
 import ContentTable from "../../_components/content-table"
 import ContentFormModal from "../../_components/content-form-modal"
+import { useSession } from "next-auth/react"
 
 interface Content {
   id: number
@@ -44,8 +45,8 @@ export default function SubcategoryContentPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingContent, setEditingContent] = useState<Content | null>(null)
 
-  const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NwbHVyamouc2NhbGV1cGRldmFnZW5jeS5jb20vYXBpL2xvZ2luIiwiaWF0IjoxNzQ4ODY1NjYzLCJleHAiOjE3NTE0NTc2NjMsIm5iZiI6MTc0ODg2NTY2MywianRpIjoiZk1iM1VueUVZaVM0UWM5MyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.AKGGXMOcJh5V8FuOwCXTYPPJm2MpTsrW5kFhKQ_umts"
+  const session = useSession();
+  const token = (session?.data?.user as {token : string})?.token;
 
   useEffect(() => {
     if (categoryId && subcategoryId) {
