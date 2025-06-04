@@ -17,7 +17,7 @@ export default function PersonalInformationForm({
       <div>
         {/* Header */}
         <div className="flex justify-between items-start mb-8">
-          <div>
+          <div className="">
             <h1 className="text-3xl md:text-[35px] lg:text-10 font-poppins font-semibold text-[#212121] leading-[120%] mb-2">
               Settings
             </h1>

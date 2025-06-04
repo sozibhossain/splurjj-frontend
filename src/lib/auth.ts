@@ -23,7 +23,7 @@ export const authOptions: NextAuthOptions = {
 
         try {
           const res = await fetch(
-            `https://splurjj.scaleupdevagency.com/api/login`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`,
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
