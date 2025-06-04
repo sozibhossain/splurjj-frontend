@@ -1,5 +1,6 @@
 "use client";
 
+import ThemeToggle from "@/app/theme-toggle";
 import { Input } from "@/components/ui/input";
 import { ChevronDown, Menu, Search, ShoppingCart, X } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -208,6 +209,9 @@ const Navbar = () => {
                     />
                   </div>
                 </div>
+                {/* theme toggle  */}
+                <ThemeToggle/>
+
                 <button className="p-1 rounded-full hover:bg-gray-100 transition-colors">
                   <ShoppingCart className="text-black w-[33px] h-[33px]" />
                 </button>

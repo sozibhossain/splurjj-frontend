@@ -1,4 +1,3 @@
-"use client";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import PersonalInfoForm from "./PersonalInfoForm";
@@ -10,14 +9,12 @@ interface PersonalInformationFormProps {
 export default function PersonalInformationForm({
   onBack,
 }: PersonalInformationFormProps) {
-
-
   return (
     <div className="p-6">
       <div>
         {/* Header */}
         <div className="flex justify-between items-start mb-8">
-          <div>
+          <div className="">
             <h1 className="text-3xl md:text-[35px] lg:text-10 font-poppins font-semibold text-[#212121] leading-[120%] mb-2">
               Settings
             </h1>
@@ -46,7 +43,9 @@ export default function PersonalInformationForm({
             </div>
           </div>
         </div>
-        <PersonalInfoForm />
+        <div className="p-4">
+          <PersonalInfoForm />
+        </div>
       </div>
     </div>
   );

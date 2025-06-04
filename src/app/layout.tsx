@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AuthProvider from "@/components/provider/AuthProvider";
 import AppProvider from "@/components/provider/AppProvider";
+import { ThemeProvider } from "next-themes";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -32,16 +33,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable} ${manrope.variable} antialiased`}>
-        <AuthProvider>
-          <AppProvider>
-            {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <AuthProvider>
+            <AppProvider>
+              {children}
 
-            <Toaster position="top-right" />
-            <ToastContainer />
-          </AppProvider>
-        </AuthProvider>
+              <Toaster position="top-right" />
+              <ToastContainer />
+            </AppProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
