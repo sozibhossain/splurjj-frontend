@@ -8,6 +8,11 @@
   }
 }
 
+.container{
+  max-width: 98%;
+  margin: 0 auto;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -176,4 +181,38 @@
 
 .list-item h6 {
   @apply text-sm;
+}
+
+
+
+
+h1{
+  @apply text-[#131313] dark:text-white
+}
+h2{
+  @apply text-[#131313] dark:text-white
+}
+h3{
+  @apply text-[#131313] dark:text-white
+}
+h4{
+  @apply text-[#131313] dark:text-white
+}
+h5{
+  @apply text-[#131313] dark:text-white
+}
+h6{
+  @apply text-[#131313] dark:text-white
+}
+p{
+  @apply text-[#131313] dark:text-white
+}
+li{
+  @apply text-[#131313] dark:text-white
+}
+Link{
+  @apply text-[#131313] dark:text-white
+}
+span{
+  @apply text-[#131313] dark:text-white
 }

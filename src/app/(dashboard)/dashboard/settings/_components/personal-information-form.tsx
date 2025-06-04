@@ -1,4 +1,3 @@
-"use client";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import PersonalInfoForm from "./PersonalInfoForm";
@@ -10,8 +9,6 @@ interface PersonalInformationFormProps {
 export default function PersonalInformationForm({
   onBack,
 }: PersonalInformationFormProps) {
-
-
   return (
     <div className="p-6">
       <div>
@@ -46,7 +43,9 @@ export default function PersonalInformationForm({
             </div>
           </div>
         </div>
-        <PersonalInfoForm />
+        <div className="p-4">
+          <PersonalInfoForm />
+        </div>
       </div>
     </div>
   );
