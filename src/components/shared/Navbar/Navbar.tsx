@@ -52,7 +52,7 @@ const Navbar = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch("https://splurjj.scaleupdevagency.com/api/categories")
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories`)
       const data: ApiResponse = await response.json()
       if (data.success) {
         setCategories(data.data)
