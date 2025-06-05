@@ -3,7 +3,9 @@
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import HeroSection from "../../_components/Hero/HeroSection";
-import FourthBlog from "@/app/(website)/videos/_components/FourthBlog";
+import FirstContents from "../../_components/FirstContents/FirstContents";
+import SecondContents from "../../_components/SecondContents/SecondContents";
+import ThirdContents from "../../_components/ThirdContents/ThirdContents";
 
 interface Category {
   id: number;
@@ -127,8 +129,10 @@ function Page() {
   return (
     <div className="">
       <HeroSection />
-      <FourthBlog />
-      <h1>hello</h1>
+      <FirstContents />
+      <SecondContents />
+      <ThirdContents />
+
 
     </div>
   );
