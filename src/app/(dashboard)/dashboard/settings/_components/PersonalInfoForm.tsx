@@ -88,7 +88,7 @@ export default function PersonalInfoForm() {
       }
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/settings/info`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/settings/info?_method=PUT`,
         {
           method: "POST",
           headers: {
