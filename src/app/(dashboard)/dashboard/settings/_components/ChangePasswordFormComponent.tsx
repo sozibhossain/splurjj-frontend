@@ -1,6 +1,5 @@
 "use client";
 
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -17,6 +16,8 @@ import { Input } from "@/components/ui/input";
 import { useMutation } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 const formSchema = z
   .object({
@@ -32,8 +33,12 @@ const formSchema = z
   });
 
 export default function ChangePasswordFormComponent() {
-    const session = useSession();
-    const token = (session?.data?.user as { token: string })?.token;
+  const session = useSession();
+  const token = (session?.data?.user as { token: string })?.token;
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,30 +51,27 @@ export default function ChangePasswordFormComponent() {
   const { mutate, isPending } = useMutation({
     mutationKey: ["change-password"],
     mutationFn: (values: z.infer<typeof formSchema>) =>
-      fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/settings/password`,
-        {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(values),
-        }
-      ).then((res) => res.json()),
-      onSuccess: (data)=>{
-        if(!data?.success){
-            toast.error(data?.message || "Something went wrong");
-            return
-        }
-        toast.success(data?.message || "Password changed successfully");
-        form.reset();
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/settings/password`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(values),
+      }).then((res) => res.json()),
+    onSuccess: (data) => {
+      if (!data?.success) {
+        toast.error(data?.message || "Something went wrong");
+        return;
       }
+      toast.success(data?.message || "Password changed successfully");
+      form.reset();
+    },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    mutate(values)
+    mutate(values);
   }
 
   return (
@@ -99,12 +101,23 @@ export default function ChangePasswordFormComponent() {
                   Current Password
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="password"
-                    placeholder="Enter your current password"
-                    className="w-full h-[51px] border border-[#595959] placeholder:text-[#595959] text-[#212121] font-poppins font-normal text-base tracking-[0%] rounded-[8px]"
-                    {...field}
-                  />
+                  <div className="relative">
+                    <Input
+                      type={showCurrentPassword ? "text" : "password"}
+                      placeholder="Enter your current password"
+                      className="w-full h-[51px] border border-[#595959] placeholder:text-[#595959] text-[#212121] font-poppins font-normal text-base tracking-[0%] rounded-[8px]"
+                      {...field}
+                    />
+                    <button
+                      type="button"
+                      className="absolute right-3 top-3.5"
+                      onClick={() =>
+                        setShowCurrentPassword(!showCurrentPassword)
+                      }
+                    >
+                      {showCurrentPassword ? <Eye /> : <EyeOff />}
+                    </button>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -121,12 +134,21 @@ export default function ChangePasswordFormComponent() {
                     New Password
                   </FormLabel>
                   <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Enter new password"
-                      className="w-full h-[51px] border border-[#595959] placeholder:text-[#595959] text-[#212121] font-poppins font-normal text-base tracking-[0%] rounded-[8px]"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Input
+                        type={showNewPassword ? "text" : "password"}
+                        placeholder="Enter new password"
+                        className="w-full h-[51px] border border-[#595959] placeholder:text-[#595959] text-[#212121] font-poppins font-normal text-base tracking-[0%] rounded-[8px]"
+                        {...field}
+                      />
+                      <button
+                        type="button"
+                        className="absolute right-3 top-3.5"
+                        onClick={() => setShowNewPassword(!showNewPassword)}
+                      >
+                        {showNewPassword ? <Eye /> : <EyeOff />}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -142,12 +164,23 @@ export default function ChangePasswordFormComponent() {
                     Confirm New Password
                   </FormLabel>
                   <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Confirm new password"
-                      className="w-full h-[51px] border border-[#595959] placeholder:text-[#595959] text-[#212121] font-poppins font-normal text-base tracking-[0%] rounded-[8px]"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Input
+                        type={showConfirmNewPassword ? "text" : "password"}
+                        placeholder="Confirm new password"
+                        className="w-full h-[51px] border border-[#595959] placeholder:text-[#595959] text-[#212121] font-poppins font-normal text-base tracking-[0%] rounded-[8px]"
+                        {...field}
+                      />
+                      <button
+                        type="button"
+                        className="absolute right-3 top-3.5"
+                        onClick={() =>
+                          setShowConfirmNewPassword(!showConfirmNewPassword)
+                        }
+                      >
+                        {showConfirmNewPassword ? <Eye /> : <EyeOff />}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
